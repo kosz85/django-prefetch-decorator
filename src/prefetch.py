@@ -171,7 +171,10 @@ def prefetch(**prefetch_kwargs):
     # Main prefetch engine which collect what to prefetch
     prefetch = collections.defaultdict(list)
     for k, v in prefetch_kwargs.items():
-        key_model = load_model_call(k)
+        try:
+            key_model = load_model_call(k)
+        except:
+            key_model = lambda: load_model_call(k)
         for path in v:
             if isfunc(path):
                 extend = func_paths_call(path, key_model, None)
