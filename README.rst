@@ -54,10 +54,12 @@ Here's a simplified example of using prefetch decorator:
         r.get_timezone()  # fully prefetch for this func no db calls
 
 
-Business.get_timezone.get_prefetch results in
-{<function lib.prefetch.<lambda>>: [<function lib.prefetch.<lambda>>, 'regions']}
-after prefetch:
-{some.path.to.model.Business: ['regions__timezone']}
+    
+    >>> Business.get_timezone.get_prefetch
+    {<function lib.prefetch.<lambda>>: [<function lib.prefetch.<lambda>>, 'regions']}
+    
+    # after lazy loadings (when get_prefetch was called) same prefetch:
+    {some.path.to.model.Business: ['regions__timezone']}
 
 
 
